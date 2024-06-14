@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Filtered Products</title>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  background-color: #ecb282;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.filters {
+  max-width: 800px; /* Limiting the width for better readability */
+  width: 100%;
+  box-sizing: border-box; /* Include padding and border in the width */
+  margin-top: 20px;
+}
+
+.filters h2 {
+  text-align: center; /* Center align headings */
+}
+
+.filters section {
+  display: none;
+}
+
+.filters section.active {
+  display: block;
+  margin-bottom: 20px; /* Add margin to separate sections */
+}
+
+.checkbox-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.checkbox-container label {
+  padding: 10px;
+  font-size: large;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  border-radius: 10px;
+  border: 2px solid #000; /* Border color */
+  text-align: center; /* Center align text */
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+.pagination button:hover {
+  background-color: #0056b3;
+}
+
+@media only screen and (max-width: 600px) {
+  .checkbox-container {
+    flex-direction: column; /* Stack checkboxes vertically on smaller screens */
+    align-items: center; /* Center align checkboxes vertically */
+  }
+
+  .pagination {
+    flex-direction: column; /* Stack pagination buttons vertically on smaller screens */
+    align-items: center; /* Center align pagination buttons vertically */
+  }
+}
+
+</style>
+</head>
+<body>
+
+<form method="post" action="{% url 'filter_products' %}" class="filters">
+    {% csrf_token %}
+
+    <!-- Step 1: Age Categories -->
+    <section id="step1" class="active">
+        <h2>Age Categories</h2>
+        <div class="checkbox-container">
+            <label><input type="checkbox" name="teens">Teens</label>
+            <label><input type="checkbox" name="twenties"> Twenties</label>
+            <label><input type="checkbox" name="thirties"> Thirties</label>
+            <label><input type="checkbox" name="forties"> Forties</label>
+            <label><input type="checkbox" name="fifties"> Fifties</label>
+            <label><input type="checkbox" name="sixties"> Sixties</label>
+        </div>
+        <div class="pagination">
+            <button type="button" id="nextBtn1">Next</button>
+        </div>
+    </section>
+
+    <!-- Step 2: Skin Types -->
+    <section id="step2">
+        <h2>Skin Types</h2>
+        <div class="checkbox-container">
+            <label><input type="checkbox" name="skin_type_normal"> Normal</label>
+            <label><input type="checkbox" name="oily"> Oily</label>
+            <label><input type="checkbox" name="dry"> Dry</label>
+            <label><input type="checkbox" name="sensitive"> Sensitive</label>
+            <label><input type="checkbox" name="combination"> Combination</label>
+        </div>
+        <div class="pagination">
+            <button type="button" id="prevBtn2">Back</button>
+            <button type="button" id="nextBtn2">Next</button>
+        </div>
+    </section>
+
+    <!-- Step 3: Skin Concerns -->
+    <section id="step3">
+        <h2>Skin Concerns</h2>
+        <div class="checkbox-container">
+            <label><input type="checkbox" name="skin_concerns_acne"> Acne</label>
+            <label><input type="checkbox" name="aging"> Aging</label>
+            <label><input type="checkbox" name="dull_skin"> Dull Skin</label>
+            <label><input type="checkbox" name="elasticity"> Elasticity</label>
+            <label><input type="checkbox" name="hydration"> Hydration</label>
+            <label><input type="checkbox" name="pigmentation"> Pigmentation</label>
+            <label><input type="checkbox" name="pores"> Pores</label>
+            <label><input type="checkbox" name="redness"> Redness</label>
+            <label><input type="checkbox" name="scarring"> Scarring</label>
+            <label><input type="checkbox" name="sensitive_skin"> Sensitive Skin</label>
+            <label><input type="checkbox" name="sun_protection"> Sun Protection</label>
+            <label><input type="checkbox" name="texture"> Texture</label>
+            <label><input type="checkbox" name="uneven_skin_tone"> Uneven Skin Tone</label>
+        </div>
+        <div class="pagination">
+            <button type="button" id="prevBtn3">Back</button>
+            <button type="button" id="nextBtn3">Next</button>
+        </div>
+    </section>
+
+    <!-- Step 4: Product Types -->
+    <section id="step4">
+        <h2>Product Types</h2>
+        <div class="checkbox-container">
+            <label><input type="checkbox" name="body_care"> Body Care</label>
+            <label><input type="checkbox" name="eye_cream"> Eye Cream</label>
+            <label><input type="checkbox" name="cleanser"> Cleanser</label>
+            <label><input type="checkbox" name="exfoliant"> Exfoliant</label>
+            <label><input type="checkbox" name="microneedling"> Microneedling</label>
+            <label><input type="checkbox" name="moisturizer"> Moisturizer</label>
+            <label><input type="checkbox" name="peels"> Peels</label>
+            <label><input type="checkbox" name="serums"> Serums</label>
+            <label><input type="checkbox" name="sun_screen"> Sunscreen</label>
+            <label><input type="checkbox" name="spot_treatment"> Spot Treatment</label>
+            <label><input type="checkbox" name="toner"> Toner</label>
+            <label><input type="checkbox" name="use_sunscreen_daily"> Use Sunscreen Daily</label>
+            <label><input type="checkbox" name="react_to_sun_exposure"> React to Sun Exposure</label>
+            <label><input type="checkbox" name="hair_loss"> Hair Loss</label>
+        </div>
+        <div>
+            <label class="checkbox-container" style="padding: 30px;">Enter Your Email :<input type="email" name="email"></label>
+        </div>
+        <div class="pagination">
+            <button type="button" id="prevBtn4">Back</button>
+            <button type="submit">Filter</button>
+        </div>
+    </section>
+</form>
+
+
+
+<!-- {% if product_count > 0 %}
+    <p>Total Products: {{ product_count }}</p>
+
+    <ul class="products">
+        {% for product in products %}
+            <li>{{ product.product_name }}</li>
+        {% empty %}
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>Select different combination</p>
+{% endif %} -->
+
+<script>
+    const steps = ['step1', 'step2', 'step3', 'step4'];
+    let currentStep = 0;
+
+    function showStep(step) {
+        document.getElementById(steps[currentStep]).classList.remove('active');
+        document.getElementById(steps[step]).classList.add('active');
+        currentStep = step;
+    }
+
+    document.getElementById('nextBtn1').addEventListener('click', () => showStep(1));
+    document.getElementById('prevBtn2').addEventListener('click', () => showStep(0));
+    document.getElementById('nextBtn2').addEventListener('click', () => showStep(2));
+    document.getElementById('prevBtn3').addEventListener('click', () => showStep(1));
+    document.getElementById('nextBtn3').addEventListener('click', () => showStep(3));
+    document.getElementById('prevBtn4').addEventListener('click', () => showStep(2));
+
+    const prevProductBtn = document.getElementById('prevProductBtn');
+    const nextProductBtn = document.getElementById('nextProductBtn');
+    const productsList = document.querySelector('.products');
+    const productCount = {{ product_count }};
+    const itemsPerPage = 10; // Number of products per page
+    let currentPage = 1;
+
+    updateProductPagination();
+
+    prevProductBtn.addEventListener('click', () => {
+        if (currentPage > 1) {
+            currentPage--;
+            updateProductPagination();
+        }
+    });
+
+    nextProductBtn.addEventListener('click', () => {
+        if (currentPage < Math.ceil(productCount / itemsPerPage)) {
+            currentPage++;
+            updateProductPagination();
+        }
+    });
+
+
+</script>
+
+</body>
+</html>

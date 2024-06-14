@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product</title>
+</head>
+<style>
+    body{
+        background-color: #ecb282;
+        text-align: center;
+    }
+    </style>
+<body>
+    {% if product_count > 0 %}
+    <p>Total Products: {{ product_count }}</p>
+
+    <div class="products" style="padding: 10px;">
+        {% for product in products %}
+            <div style="padding: 10px;">{{ product.product_name }}</div>
+        {% empty %}
+        {% endfor %}
+    </div>
+{% else %}
+    <p>Select different combination</p>
+{% endif %}
+</body>
+</html>
