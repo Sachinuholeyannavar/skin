@@ -129,4 +129,4 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'sachinuh2001@gmail.com'
-EMAIL_HOST_PASSWORD ='lkvl kmho dimd lqmr'
+EMAIL_HOST_PASSWORD =''
